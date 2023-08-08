@@ -10,62 +10,62 @@ You can install the library using your preferred package manager:
 
 # bash
 Copy code
-npm install facebook-login-api
+# npm install facebook-login-api
 Usage:
 
 Import the library into your application:
 
 # javascript
 Copy code
-const FacebookLoginAPI = require('facebook-login-api');
-Initializing:
+# const FacebookLoginAPI = require('facebook-login-api');
+# Initializing:
 
 Initialize the FacebookLoginAPI with your Facebook App credentials:
 
-javascript
+# javascript
 Copy code
-const facebookLogin = new FacebookLoginAPI({
-  appId: 'YOUR_APP_ID',
-  appSecret: 'YOUR_APP_SECRET',
-  redirectUri: 'YOUR_REDIRECT_URI',
-});
-Login and Data Retrieval:
+# const facebookLogin = new FacebookLoginAPI({
+  # appId: 'YOUR_APP_ID',
+  # appSecret: 'YOUR_APP_SECRET',
+ # redirectUri: 'YOUR_REDIRECT_URI',
+# });
+# Login and Data Retrieval:
 
 Implement the Facebook login functionality in your application's login page:
 
 # javascript
 Copy code
 // Handle user login
-app.get('/login/facebook', (req, res) => {
-  const loginUrl = facebookLogin.getLoginUrl();
-  res.redirect(loginUrl);
-});
+# app.get('/login/facebook', (req, res) => {
+ #  const loginUrl = facebookLogin.getLoginUrl();
+#   res.redirect(loginUrl);
+# });
 
 // Handle redirect after Facebook login
-app.get('/login/facebook/callback', async (req, res) => {
-  const { code } = req.query;
-  const accessToken = await facebookLogin.getAccessToken(code);
-  const userData = await facebookLogin.getUserData(accessToken);
+# app.get('/login/facebook/callback', async (req, res) => {
+  # const { code } = req.query;
+  # const accessToken = await facebookLogin.getAccessToken(code);
+  # const userData = await facebookLogin.getUserData(accessToken);
 
   // Store user data and set session
-  req.session.user = userData;
-  res.redirect('/profile');
-});
+  # req.session.user = userData;
+  # res.redirect('/profile');
+# });
 # Display User Data:
 
 Create a profile page to display the user's Facebook data:
 
 # javascript
 Copy code
-app.get('/profile', (req, res) => {
-  const user = req.session.user;
-  if (user) {
+# app.get('/profile', (req, res) => {
+  # const user = req.session.user;
+  # if(user) {
     // Display user data
-    res.render('profile', { user });
-  } else {
-    res.redirect('/login');
-  }
-});
+     # res.render('profile', { user });
+ #  }  else {
+   #  res.redirect('/login');
+ # }
+# });
 # Session Management:
 
 The library includes session management to maintain user sessions. Make sure you have a session middleware set up in your application.
